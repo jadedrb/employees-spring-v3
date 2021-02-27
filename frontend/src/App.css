@@ -1,3 +1,132 @@
-.App {
-  font-size: 50pt;
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 3px solid black;
+  padding: 20px;
+  height: 150px;
+}
+.hidden-form {
+  border: 3px solid black;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  background-color: grey;
+}
+label {
+  position: relative;
+}
+input {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+ul {
+  color: grey;
+  list-style: none;
+  border: 1px dotted black;
+  padding: 20px;
+}
+li {
+  color: black;
+  padding: 2px;
+  padding-left: 10px;
+}
+li:nth-child(1) {
+  padding-top: 10px;
+}
+.last-emp {
+  transition: width 2s, height 4s;
+  animation-name: new-emp;
+  animation-duration: 4s;
+}
+.td-standard {
+  display: none;
+}
+.view-td {
+  display: flex;
+  position: absolute;
+  right: 12px;
+  border: none;
+}
+.view-td:hover {
+  background-color: rgb(42, 42, 42);
+  color: white;
+}
+.view-td:active {
+  color: red;
+}
+tr:hover {
+  background-color: rgb(179, 178, 178);
+  cursor: pointer;
+}
+
+@keyframes new-emp {
+  from {
+    background-color: black;
+    color: white;
+  }
+  to {background-color: white;}
+}
+
+
+table {
+  border: 1px solid black;
+  width: 100%;
+  margin-top: 10px;
+  position: relative;
+}
+
+td {
+  text-align: center;
+  border-bottom: 1px dotted black;
+  border-left: 1px dotted black;
+}
+
+td:nth-child(1) {
+  border-left: none;
+}
+
+tr:nth-last-child(1) td {
+  border-bottom: none;
+}
+
+th {
+  border-left: 1px solid black;
+  border-bottom: 2px solid black;
+}
+th:nth-child(1) {
+  border-left: none;
+}
+
+td input {
+  position: relative;
+}
+
+.loader-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  border: 1px solid black;
+  height: 100%;
+  width:100%;
+  background-color: rgb(202, 200, 200);
+  opacity: .4;
+}
+
+.loader {
+  
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid black; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin .5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
