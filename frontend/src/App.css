@@ -101,6 +101,7 @@ th:nth-child(1) {
 
 td input {
   position: relative;
+  text-align: center;
 }
 
 .loader-body {

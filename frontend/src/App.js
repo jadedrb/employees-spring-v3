@@ -16,6 +16,9 @@ function App() {
   const [editField, setEditField] = useState('')
   const [deleting, setDeleting] = useState(false)
 
+  const [propSort, setPropSort] = useState('')
+  const [ascDesc, setAscDesc] = useState(false)
+
   const [focus, setFocus] = useState('')
 
   const inputRef1 = useRef()
@@ -34,6 +37,7 @@ function App() {
 
   const fetchEmployeeData = () => {
     setLoading(true)
+
     axios.get('/api/employees')
       .then(res => {
         console.log('Data: ')
@@ -139,11 +143,9 @@ function App() {
 
   const handleFocus = e => {
     setFocus(e.target.name)
-    console.log(e.target.name)
   }
 
   const ifLastEmp = emp => {
-    console.log(dataCount.current)
     if (dataCount.current && emp.id === employees[employees.length - 1].id) {
       setTimeout(() => dataCount.current = false, 1000)
       return 'last-emp'
@@ -172,6 +174,21 @@ function App() {
       setJobTitle(emp.jobTitle)
       setEmail(emp.email)
     }
+  }
+
+  const adjustSorting = propToSort => {
+    setPropSort(propToSort)
+    setAscDesc(!ascDesc)
+  }
+
+  let filteredEmployees = [...employees]
+
+  if (propSort === 'id') {
+    if (ascDesc) filteredEmployees.sort((a, b) => a[propSort] - b[propSort])
+    else filteredEmployees.sort((b, a) => a[propSort] - b[propSort])
+  } else {
+    if (ascDesc) filteredEmployees.sort((a, b) => a[propSort]?.[0] > b[propSort]?.[0] ? 1 : -1)
+    else filteredEmployees.sort((b, a) => a[propSort]?.[0] > b[propSort]?.[0] ? 1 : -1)
   }
 
   return (
@@ -224,23 +241,23 @@ function App() {
       </form>
       : <div className='hidden-form' onMouseOver={handleMouseOver}>New Employee</div>}
 
-    {employees.length ? 
+    {filteredEmployees.length ? 
 
       <table>
         
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Job Title</th>
-            <th>Email</th>
+            <th onClick={() => adjustSorting('id')}>ID</th>
+            <th onClick={() => adjustSorting('lastName')}>Last Name</th>
+            <th onClick={() => adjustSorting('firstName')}>First Name</th>
+            <th onClick={() => adjustSorting('jobTitle')}>Job Title</th>
+            <th onClick={() => adjustSorting('email')}>Email</th>
           </tr>
         </thead>
         
       
         <tbody>
-          {employees.map(emp => 
+          {filteredEmployees.map(emp => 
             <tr 
               key={emp.id} 
               className={ifLastEmp(emp)} 
