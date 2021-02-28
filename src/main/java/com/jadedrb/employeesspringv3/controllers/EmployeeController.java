@@ -23,8 +23,8 @@ import com.jadedrb.employeesspringv3.ResourceNotFoundException;
 import com.jadedrb.employeesspringv3.models.Employee;
 import com.jadedrb.employeesspringv3.repositories.EmployeeRepository;
 
-@CrossOrigin
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "http://employees-spring-v3.herokuapp.com"})
 @RequestMapping(value = "/api")
 public class EmployeeController {
 

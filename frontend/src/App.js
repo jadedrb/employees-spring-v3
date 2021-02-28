@@ -29,7 +29,6 @@ function App() {
   const dataCount = useRef(false)
 
   useEffect(() => {
-    console.log(ifLastEmp())
     fetchEmployeeData()
   }, [])
 
@@ -145,15 +144,6 @@ function App() {
     setFocus(e.target.name)
   }
 
-  const ifLastEmp = emp => {
-    if (dataCount.current && emp.id === employees[employees.length - 1].id) {
-      setTimeout(() => dataCount.current = false, 1000)
-      return 'last-emp'
-    } else {
-      return ''
-    }
-  }
-
   const handleMouseOver = (e) => {
     setTimeout(() => inputRef1.current.focus(), 1)
     setViewForm(true)
@@ -260,7 +250,6 @@ function App() {
           {filteredEmployees.map(emp => 
             <tr 
               key={emp.id} 
-              className={ifLastEmp(emp)} 
               onMouseOver={() => addOrRemoveClass(`.td-${emp.id}`, 'add', 'view-td')}
               onMouseLeave={() => addOrRemoveClass(`.td-${emp.id}`, 'remove', 'view-td')}
               onClick={(e) => editableField(e, emp)}
